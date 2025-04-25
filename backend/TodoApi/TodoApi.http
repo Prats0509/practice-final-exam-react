@@ -1,0 +1,6 @@
+@TodoApi_HostAddress = http://localhost:5274
+
+GET http://localhost:/api/tasks
+Accept: application/json
+
+###
