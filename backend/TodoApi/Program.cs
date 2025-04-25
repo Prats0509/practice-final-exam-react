@@ -25,11 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope()){
+using (var scope = app.Services.CreateScope())
+{
     var db = scope.ServiceProvider.GetRequiredService<TodoContext>();
-    db.Database.Migrate();
+    db.Database.Migrate(); // <-- this triggers table creation
 }
-
 app.UseCors("AllowAllOrigins");
 app.MapControllers();
 

@@ -6,7 +6,7 @@ namespace TodoApi.Controllers
     using Microsoft.EntityFrameworkCore;
 
     [ApiController]
-    [Route("/[controller]")]
+    [Route("api/[controller]")]
     public class TasksController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -31,12 +31,13 @@ namespace TodoApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> CreateTask(TaskItem task)
-        {
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
-        }
+public async Task<ActionResult<TaskItem>> CreateTask([FromBody] TaskItem task)
+{
+    _context.Tasks.Add(task);
+    await _context.SaveChangesAsync();
+    return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
+}
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTask(int id, TaskItem task)
